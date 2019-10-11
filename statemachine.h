@@ -3,8 +3,6 @@
 #ifndef STATEMACHINE_H
 #define STATEMACHINE_H
 
-#include "klib.h"
-
 struct state_data;
 
 // casting from a regular void pointer (a data pointer) to a function pointer is undefined behaviour.
