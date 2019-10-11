@@ -21,9 +21,6 @@ typedef struct state_data state_data;
 
 
 // functions
-void state_machine(state_data * data);
-
-// the user will define this function in a compilation unit of their choosing.
-state init(state_data* data);
+void state_machine(state_data * data, state initial_state);
 
 #endif
