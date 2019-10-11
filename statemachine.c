@@ -1,8 +1,6 @@
 #include "statemachine.h"
 
-int state_machine(state_data* data) {
-	data->next_state = init; 
-	data->return_code = 0;
-	while (data->next_state = data->next_state(&data));
-	return data->return_code;
+void state_machine(state_data* data) {
+	state next_state = init;
+	while (next_state = next_state(data));
 }

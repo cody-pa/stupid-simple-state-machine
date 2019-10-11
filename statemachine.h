@@ -1,5 +1,9 @@
+// This is a finite state machine!
+
 #ifndef STATEMACHINE_H
 #define STATEMACHINE_H
+
+#include "klib.h"
 
 struct state_data;
 
@@ -9,25 +13,19 @@ struct state_data;
 typedef void* (*state_inner)(void);
 typedef state_inner(*state)(struct state_data*);
 
-#ifndef STATEMACHINE_PARAMS
-#define STATEMACHINE_PARAMS
-#endif
-
-// The data structure for the states. Define params before including this file to 
-// set the user fields.
+#ifdef STATEMACHINE_PARAMS
 typedef struct state_data {
-	state next_state;
-	int return_code;
 	STATEMACHINE_PARAMS
 } state_data;
+#else
+typedef struct state_data state_data;
+#endif
 
 
-// The function that runs the state machine.
-// Call this in your own code and pass it a state_data struct
-int state_machine(state_data* data);
+// functions
+void state_machine(state_data * data);
 
-// define this function in your own compilation unit. It's the initial state that
-// is run.
+// the user will define this function in a compilation unit of their choosing.
 state init(state_data* data);
 
 #endif
