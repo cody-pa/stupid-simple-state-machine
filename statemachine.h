@@ -3,24 +3,23 @@
 #ifndef STATEMACHINE_H
 #define STATEMACHINE_H
 
-struct state_data;
+struct state_data_inner;
 
-// casting from a regular void pointer (a data pointer) to a function pointer is undefined behaviour.
-// therefore i've created a junk function pointer type to use as a sort of "void function pointer"
-/// also this is necessary because i can't make the typedef return its own type; C doesn't allow recursive typedefs :(
-typedef void* (*state_inner)(void);
-typedef state_inner(*state)(struct state_data*);
+typedef void (*state)(struct state_data_inner*);
 
 #ifdef STATEMACHINE_PARAMS
-typedef struct state_data {
+typedef struct state_data_inner {
+	state next_state;
 	STATEMACHINE_PARAMS
 } state_data;
 #else
-typedef struct state_data state_data;
+typedef struct state_data_inner {
+	state next_state;
+} state_data;
 #endif
 
 
 // functions
-void state_machine(state_data * data, state initial_state);
+void state_machine(state_data * data);
 
 #endif
